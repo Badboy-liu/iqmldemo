@@ -8,6 +8,7 @@ find_package(Qt6 COMPONENTS
         OpenGLWidgets OpenGL Multimedia test
         REQUIRED)
 
-add_subdirectory(01)
+add_subdirectory(01_application_window)
+add_subdirectory(02_Behavior_quick)
 add_subdirectory(common)
 
