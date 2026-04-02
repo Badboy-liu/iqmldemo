@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>d_role1.png</file>
+        <file>BLHX_Z23.png</file>
+    </qresource>
+</RCC>
