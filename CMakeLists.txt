@@ -7,10 +7,11 @@ find_package(Qt6 COMPONENTS
         QuickControls2
         OpenGLWidgets OpenGL Multimedia test
         REQUIRED)
-
+find_package(ZXing CONFIG REQUIRED)
 add_subdirectory(01_application_window)
 add_subdirectory(02_Behavior_quick)
 add_subdirectory(03_blur)
+add_subdirectory(04_button_delegate)
 
 add_subdirectory(common)
 
