@@ -19,6 +19,7 @@ add_subdirectory(03_blur)
 add_subdirectory(04_button_delegate)
 add_subdirectory(05_input_panel)
 add_subdirectory(06_combobox)
+add_subdirectory(07_cpp_qml)
 
 add_subdirectory(common)
 
