@@ -15,5 +15,6 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
     initVcpkgRuntimeEnv(engine);
     engine.loadFromModule("App", "Main");
+    qDebug() << QDir(":/qt/qml/App").entryList();
     return app.exec();
 }

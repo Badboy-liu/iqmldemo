@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.VirtualKeyboard
-
+import App
 Window {
     id: winodw
     width: 640

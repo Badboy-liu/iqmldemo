@@ -1,4 +1,4 @@
-
+find_package(Qt6 REQUIRED COMPONENTS Qml)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
@@ -10,6 +10,7 @@ target_link_libraries(12_click_accepted PRIVATE
         Qt6::Quick
         Qt6::Sql
         Qt6::Concurrent
+        Qt6::Qml
         common)
 
 
@@ -17,15 +18,18 @@ target_link_libraries(12_click_accepted PRIVATE
 
 #qt_add_resources(RESOURCES qml.qrc)
 #target_sources(12_click_accepted PRIVATE ${RESOURCES})
+
 qt_add_qml_module(12_click_accepted
     URI App
     QML_FILES
-        qml/Main.qml
+        qml/Main.qm l
 #        RESOURCES images.qrc
 #        RESOURCES images/img.jpeg
 )
 
-
+target_sources(12_click_accepted PRIVATE
+        qml/qmldir
+)
 
 include(GNUInstallDirs)
 install(TARGETS 12_click_accepted
