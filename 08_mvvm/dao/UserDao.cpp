@@ -81,3 +81,28 @@ int UserDao::count(const std::shared_ptr<UserPageReq> req)
 
     return 0;
 }
+
+void UserDao::updateUser(int id, const QString& name, int age)
+{
+    QSqlQuery query(DatabaseManager::getConnection());
+
+    query.prepare("UPDATE users SET name=:name, age=:age WHERE id=:id");
+    query.bindValue(":name", name);
+    query.bindValue(":age", age);
+    query.bindValue(":id", id);
+
+    query.exec();
+}
+
+void UserDao::addUser(const QString& name, int age)
+{
+    QSqlQuery query(DatabaseManager::getConnection());
+
+    query.prepare("INSERT INTO users(name, age) VALUES(:name, :age)");
+    query.bindValue(":name", name);
+    query.bindValue(":age", age);
+
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+    }
+}

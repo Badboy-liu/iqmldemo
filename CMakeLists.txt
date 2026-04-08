@@ -23,6 +23,7 @@ add_subdirectory(05_input_panel)
 add_subdirectory(06_combobox)
 add_subdirectory(07_cpp_qml)
 add_subdirectory(08_mvvm)
+add_subdirectory(09_layout)
 
 add_subdirectory(common)
 

@@ -19,6 +19,8 @@ class UserDao {
 public:
     PageResult<User> queryAll(const std::shared_ptr<UserPageReq> req);
     int count(const std::shared_ptr<UserPageReq> req);
+    void updateUser(int id, const QString& name, int age);
+    void addUser(const QString& name, int age);
 };
 
 

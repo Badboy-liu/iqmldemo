@@ -48,3 +48,41 @@ void UserViewModel::load(UserPageReq* req) {
         }, Qt::QueuedConnection);   // ✅ 强制主线程
     });
 }
+
+void UserViewModel::update(int id, const QString& name, int age)
+{
+    QtConcurrent::run([this, id, name, age]() {
+
+         repo->updateUser(id, name, age);
+
+         QMetaObject::invokeMethod(this, [this]() {
+             UserPageReq* req = new UserPageReq();
+             req->pageNo = 1;
+             req->pageSize = 10;
+             load(req);   // 重新加载当前页
+             delete req;
+         }, Qt::QueuedConnection);
+     });
+}
+
+void UserViewModel::add(const QString& name, int age)
+{
+    if (name.isEmpty()) return;
+
+    QtConcurrent::run([this, name, age]() {
+
+        repo->addUser(name, age);
+
+        QMetaObject::invokeMethod(this, [this]() {
+
+            // ✅ 新增后刷新第一页（常见做法）
+            UserPageReq req;
+            req.pageNo = 1;
+            req.pageSize = 10;
+            req.keyword = "";
+
+            load(&req);
+
+        }, Qt::QueuedConnection);
+    });
+}

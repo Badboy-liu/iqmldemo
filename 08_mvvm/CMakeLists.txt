@@ -38,7 +38,12 @@ target_link_libraries(08_mvvm PRIVATE
 #target_sources(08_mvvm PRIVATE ${RESOURCES})
 qt_add_qml_module(08_mvvm
     URI App
-    QML_FILES qml/Main.qml
+    QML_FILES
+        qml/Main.qml
+        qml/components/FormDrawer.qml
+        qml/components/Pagination.qml
+        qml/components/Toast.qml
+        qml/user/UserForm.qml
 
 )
 

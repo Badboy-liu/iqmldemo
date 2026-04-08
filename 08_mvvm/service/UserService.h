@@ -14,6 +14,9 @@
 class UserService {
     public:
     PageResult<User> getUsers(const std::shared_ptr<UserPageReq> req);
+    void updateUser(int id, const QString& name, int age);
+    void addUser(const QString& name, int age);
+
     UserService() {
         userDao = new UserDao();
     }
