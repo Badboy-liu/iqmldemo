@@ -4,11 +4,6 @@
 
 #include "UserRepository.h"
 
-QList<User> UserRepository::fetchUsers(const UserPageReq* req) {
-    if (!cache.isEmpty()) {
-        return cache;
-    }
-
-    cache = userService->getUsers(req);
-    return cache;
+PageResult<User> UserRepository::fetchUsers(const std::shared_ptr<UserPageReq> req) {
+    return userService->getUsers(req);;
 }

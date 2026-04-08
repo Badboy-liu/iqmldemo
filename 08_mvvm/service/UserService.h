@@ -13,7 +13,7 @@
 
 class UserService {
     public:
-    QList<User> getUsers(const UserPageReq* req);
+    PageResult<User> getUsers(const std::shared_ptr<UserPageReq> req);
     UserService() {
         userDao = new UserDao();
     }

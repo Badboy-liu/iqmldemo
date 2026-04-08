@@ -8,13 +8,17 @@
 #include "../db/DatabaseManager.h"
 #include "../entity/User.h"
 #include "QSqlQuery"
+#include "qDebug"
+#include "QSqlError"
+#include "req/PageResult.h"
 #include "req/UserPageReq.h"
 
 class User;
 
 class UserDao {
 public:
-    QList<User> queryAll(const UserPageReq* req);
+    PageResult<User> queryAll(const std::shared_ptr<UserPageReq> req);
+    int count(const std::shared_ptr<UserPageReq> req);
 };
 
 

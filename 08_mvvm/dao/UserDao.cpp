@@ -7,28 +7,77 @@
 
 
 
-QList<User> UserDao::queryAll(const UserPageReq* req) {
-    QList<User> list;
-    auto db = DatabaseManager::getConnection();
+PageResult<User> UserDao::queryAll(const std::shared_ptr<UserPageReq> req)
+{
+    PageResult<User> result;
+
+    const auto db = DatabaseManager::getConnection();
     QSqlQuery query(db);
 
     int offset = (req->pageNo - 1) * req->pageSize;
-    QString sql = R"("SELECT * FROM user where name like concat("%",?,"%") limit ? offset ?)";
-    query.prepare(sql);
-    query.addBindValue(req->keyword);
-    query.addBindValue(req->pageSize);
-    query.addBindValue(offset);
-    query.exec();
 
-    while (query.next()) {
-        list.append(
-            User{
-                query.value("id").toInt(),
-                query.value("name").toString(),
-                query.value("age").toInt(),
-            });
+    QString sql = "SELECT id, name, age FROM users ";
+
+    if (!req->keyword.isEmpty()) {
+        sql += "WHERE name LIKE '%' || :keyword || '%' ";
     }
 
-    return list;
+    sql += "LIMIT :limit OFFSET :offset";
 
+    if (!query.prepare(sql)) {
+        qDebug() << "prepare error:" << query.lastError();
+        return result;
+    }
+
+    if (!req->keyword.isEmpty())
+        query.bindValue(":keyword", req->keyword);
+
+    query.bindValue(":limit", req->pageSize);
+    query.bindValue(":offset", offset);
+
+    if (!query.exec()) {
+        qDebug() << "exec error:" << query.lastError();
+        return result;
+    }
+
+    while (query.next()) {
+        result.records.append(User{
+            query.value("id").toInt(),
+            query.value("name").toString(),
+            query.value("age").toInt(),
+        });
+    }
+
+    // ✅ 查询总数
+    result.total = count(req);
+
+    return result;
+
+
+}
+int UserDao::count(const std::shared_ptr<UserPageReq> req)
+{
+    const auto db = DatabaseManager::getConnection();
+    QSqlQuery query(db);
+
+    QString sql = "SELECT COUNT(*) FROM users ";
+
+    if (!req->keyword.isEmpty()) {
+        sql += "WHERE name LIKE '%' || :keyword || '%'";
+    }
+
+    query.prepare(sql);
+
+    if (!req->keyword.isEmpty())
+        query.bindValue(":keyword", req->keyword);
+
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return 0;
+    }
+
+    if (query.next())
+        return query.value(0).toInt();
+
+    return 0;
 }

@@ -4,6 +4,6 @@
 
 #include "UserService.h"
 
-QList<User> UserService::getUsers(const UserPageReq* req) {
+PageResult<User> UserService::getUsers(const std::shared_ptr<UserPageReq> req) {
     return userDao->queryAll(req);
 }

@@ -7,7 +7,7 @@ find_package(Qt6 COMPONENTS
         QuickControls2
         OpenGLWidgets OpenGL Multimedia test Svg sql
         REQUIRED)
-find_package(unofficial-mysql-connector-cpp CONFIG REQUIRED)
+#find_package(unofficial-mysql-connector-cpp CONFIG REQUIRED)
 
 find_package(ZXing CONFIG REQUIRED)
 find_package(Qt6VirtualKeyboard CONFIG REQUIRED)

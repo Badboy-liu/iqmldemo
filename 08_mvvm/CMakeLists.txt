@@ -20,14 +20,16 @@ add_executable(08_mvvm main.cpp
         req/UserPageReq.cpp
         req/UserPageReq.h
         req/PageReq.cpp
-        req/PageReq.h)
+        req/PageReq.h
+        req/PageResult.cpp
+        req/PageResult.h)
 
 target_link_libraries(08_mvvm PRIVATE
         Qt6::Core
         Qt6::Quick
         Qt6::Sql
         Qt6::Concurrent
-        unofficial::mysql-connector-cpp::connector common)
+        common)
 
 
 

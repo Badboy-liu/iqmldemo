@@ -11,17 +11,29 @@
 #include "../service/UserRepository.h"
 
 
-class UserViewModel:public QObject{
+class UserViewModel : public QObject
+{
     Q_OBJECT
-    Q_PROPERTY(UserListModel *model READ model CONSTANT)
-public:
-    explicit UserViewModel(QObject *parent = nullptr);
-    UserListModel *model() const;
-    Q_INVOKABLE void load(UserPageReq* req);
+    Q_PROPERTY(QAbstractListModel* model READ model NOTIFY modelChanged)
+    Q_PROPERTY(int total READ total NOTIFY totalChanged)
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 
+public:
+    explicit UserViewModel(QObject* parent = nullptr);
+    UserListModel* model() const;
+    Q_INVOKABLE void load(UserPageReq* req);
+    int total() const { return m_total; }
+    bool loading() const { return m_loading; }
+    QAbstractListModel* model() { return m_model; }
+signals:
+    void modelChanged();
+    void totalChanged();
+    void loadingChanged();
 private:
-    UserListModel *m_model;
-    UserRepository *repo;
+    UserListModel* m_model;
+    UserRepository* repo;
+    int m_total = 0;
+    bool m_loading = false;
 };
 
 

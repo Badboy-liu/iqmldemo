@@ -11,12 +11,12 @@
 
 class UserRepository {
 public:
-    QList<User> fetchUsers(const UserPageReq* req);
+    PageResult<User> fetchUsers(std::shared_ptr<UserPageReq> req);
     UserRepository() {
         userService = new UserService();
     }
 private:
-    QList<User> cache;
+    // QList<User> cache;
     UserService *userService;
 };
 

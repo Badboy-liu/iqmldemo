@@ -12,12 +12,13 @@ QSqlDatabase DatabaseManager::getConnection() {
         return QSqlDatabase::database(connName);
     }
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL",connName);
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL",connName);
 
     db.setHostName("127.0.0.1");
-    db.setDatabaseName("test_db");
-    db.setUserName("root");
+    db.setDatabaseName("testdb");
+    db.setUserName("postgres");
     db.setPassword("123456");
+    db.setPort(5432);
     db.open();
     return db;
 }
