@@ -13,6 +13,7 @@ ApplicationWindow{
     title:"hello world"
 
     ColumnLayout{
+        anchors.fill:parent
         DelayButton{
             id:delayBtn
             Layout.fillWidth:true
