@@ -4,11 +4,13 @@
 
 #ifndef IFFMPEG_CONSTANT_H
 #define IFFMPEG_CONSTANT_H
+#include <iostream>
+#include <qcoreapplication.h>
 #include <qfileinfo.h>
 #include <qstring.h>
 #include <QProcess>
 #include <QDir>
-
+#include <QtQml/QQmlApplicationEngine>
 
 
 QString getVcpkgPath() {
@@ -62,6 +64,34 @@ QString getVcpkgPath() {
 
 
 }
+void  initVcpkgRuntimeEnv(QQmlApplicationEngine& engine)
+{
+    QString vcpkgRoot = getVcpkgPath();
 
+    if (vcpkgRoot.isEmpty()) {
+        qCritical() << "无法定位 vcpkg 根目录";
+        return;
+    }
+
+    QString baseInstalled = QDir(vcpkgRoot).filePath("installed/x64-windows");
+
+    QString binPath = QDir(baseInstalled).filePath("debug/bin");
+    QString pluginPath = QDir(baseInstalled).filePath("debug/Qt6/plugins");
+    QString qmlPath = QDir(baseInstalled).filePath("debug/Qt6/qml");
+    qputenv("PATH", QByteArray(binPath.toLocal8Bit() + ";") + qgetenv("PATH"));
+    qputenv("QT_IM_MODULE", "qtvirtualkeyboard");
+    qputenv("QT_VIRTUALKEYBOARD_DESKTOP_DISABLE", "0");
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Basic");
+
+    QCoreApplication::addLibraryPath(pluginPath);
+    QCoreApplication::addLibraryPath(pluginPath + "/platforminputcontexts");
+    qInstallMessageHandler([](QtMsgType, const QMessageLogContext&, const QString& msg)
+     {
+         std::cout << msg.toStdString() << std::endl;
+     });
+    engine.addImportPath(qmlPath);
+    qDebug() << "Vcpkg env initialized";
+
+}
 
 #endif //IFFMPEG_CONSTANT_H

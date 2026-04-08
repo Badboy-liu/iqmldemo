@@ -13,5 +13,6 @@
 
 QString getVcpkgPath();
 
+void  initVcpkgRuntimeEnv(QQmlApplicationEngine& engine);
 
 #endif //IFFMPEG_CONSTANT_H

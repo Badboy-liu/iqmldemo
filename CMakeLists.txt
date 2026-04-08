@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(Qt6 COMPONENTS
         Core Widgets Gui    OpenGL Qml  Quick
         QuickControls2
-        OpenGLWidgets OpenGL Multimedia test Svg
+        OpenGLWidgets OpenGL Multimedia test Svg sql
         REQUIRED)
+find_package(unofficial-mysql-connector-cpp CONFIG REQUIRED)
+
 find_package(ZXing CONFIG REQUIRED)
 find_package(Qt6VirtualKeyboard CONFIG REQUIRED)
 find_package(Qt6VirtualKeyboardQml CONFIG REQUIRED)
@@ -20,6 +22,7 @@ add_subdirectory(04_button_delegate)
 add_subdirectory(05_input_panel)
 add_subdirectory(06_combobox)
 add_subdirectory(07_cpp_qml)
+add_subdirectory(08_mvvm)
 
 add_subdirectory(common)
 
