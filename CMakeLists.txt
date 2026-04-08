@@ -24,6 +24,7 @@ add_subdirectory(06_combobox)
 add_subdirectory(07_cpp_qml)
 add_subdirectory(08_mvvm)
 add_subdirectory(09_layout)
+add_subdirectory(10_delay_button)
 
 add_subdirectory(common)
 
