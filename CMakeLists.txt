@@ -30,6 +30,10 @@ add_subdirectory(12_click_accepted)
 add_subdirectory(13_button)
 add_subdirectory(14_import)
 add_subdirectory(15_property)
+add_subdirectory(16_attachingType)
+add_subdirectory(17_function)
+add_subdirectory(18_signal)
+add_subdirectory(19_enum)
 
 add_subdirectory(common)
 
