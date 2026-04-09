@@ -2,10 +2,10 @@ find_package(Qt6 REQUIRED COMPONENTS Qml)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-add_executable(12_click_accepted main.cpp
+add_executable(13_button main.cpp
         )
 
-target_link_libraries(12_click_accepted PRIVATE
+target_link_libraries(13_button PRIVATE
         Qt6::Core
         Qt6::Quick
         Qt6::Sql
@@ -17,9 +17,9 @@ target_link_libraries(12_click_accepted PRIVATE
 
 
 #qt_add_resources(RESOURCES qml.qrc)
-#target_sources(12_click_accepted PRIVATE ${RESOURCES})
+#target_sources(13_button PRIVATE ${RESOURCES})
 
-qt_add_qml_module(12_click_accepted
+qt_add_qml_module(13_button
     URI App
     QML_FILES
         qml/Main.qml
@@ -27,12 +27,10 @@ qt_add_qml_module(12_click_accepted
 #        RESOURCES images/img.jpeg
 )
 
-target_sources(12_click_accepted PRIVATE
-        qml/qmldir
-)
+
 
 include(GNUInstallDirs)
-install(TARGETS 12_click_accepted
+install(TARGETS 13_button
         BUNDLE DESTINATION ..
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/01
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/01
@@ -42,13 +40,13 @@ message(STATUS "CMAKE_INSTALL_BINDIR = ${CMAKE_INSTALL_BINDIR}")
 
 
 if (MSVC)
-    add_custom_command(TARGET 12_click_accepted POST_BUILD
+    add_custom_command(TARGET 13_button POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E make_directory
-            $<TARGET_FILE_DIR:12_click_accepted>/platforms
+            $<TARGET_FILE_DIR:13_button>/platforms
 
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
             "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "$<TARGET_FILE_DIR:12_click_accepted>/platforms"
+            "$<TARGET_FILE_DIR:13_button>/platforms"
     )
 endif()
