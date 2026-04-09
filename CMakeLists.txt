@@ -28,6 +28,7 @@ add_subdirectory(10_delay_button)
 add_subdirectory(11_qimage)
 add_subdirectory(12_click_accepted)
 add_subdirectory(13_button)
+add_subdirectory(14_import)
 
 add_subdirectory(common)
 
