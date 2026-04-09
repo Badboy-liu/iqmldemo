@@ -29,6 +29,7 @@ add_subdirectory(11_qimage)
 add_subdirectory(12_click_accepted)
 add_subdirectory(13_button)
 add_subdirectory(14_import)
+add_subdirectory(15_property)
 
 add_subdirectory(common)
 
